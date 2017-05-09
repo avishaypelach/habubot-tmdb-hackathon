@@ -91,6 +91,7 @@ export  default  class Filter extends React.Component {
 
     return (
       <div className="filter">
+        <img src="../../assets/img/Logo.png" alt="" className="logo"/>
         <h1 className="filter-header">Let’s flicks you some movies</h1>
 
         <div className="filter-area">
