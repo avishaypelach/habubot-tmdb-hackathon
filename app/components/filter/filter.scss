@@ -1,0 +1,29 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.filter > div  {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  padding-top: 7vw;
+}
+
+.string-filter input, .search-btn {
+  //width: 25%;
+  height: 5vw;
+  display: flex;
+  justify-content: center;
+}
+
+.filter .search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+  background-color: deepskyblue;
+  width: 25%;
+  height: 5vw;
+}
+
