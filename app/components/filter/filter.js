@@ -21,7 +21,6 @@ export  default  class Filter extends React.Component {
 
   isGanreChecked(checkboxid) {
     for (const id of this.state.selectedGenres) {
-      console.info(id, this.state.selectedGenres);
       if (checkboxid === id) {
         return true
       }
@@ -30,46 +29,28 @@ export  default  class Filter extends React.Component {
   }
 
   toggleGenreChecked(e, objId) {
-    console.info(e.target,  objId);
     const shouldBeSelected = e.target.checked;
 
     if (!shouldBeSelected) {
       //remove from state
 
       const indexToRemove = this.state.selectedGenres.indexOf(objId);
-      console.info(indexToRemove);
       const newSelectedGenres = [...this.state.selectedGenres];
       newSelectedGenres.splice(indexToRemove, 1);
-      console.info('remoooooooove', newSelectedGenres);
-      this.setState( {selectedGenres : newSelectedGenres})
+      this.setState({selectedGenres: newSelectedGenres})
     } else {
       //add
-      console.info('adddddddddd');
       let newSelectedGenres = [...this.state.selectedGenres];
       newSelectedGenres.push(objId);
-      console.info(newSelectedGenres);
-      this.setState( {selectedGenres : newSelectedGenres})
+      this.setState({selectedGenres: newSelectedGenres})
     }
   }
-
 
 
   createGenresList() {
     function reqListener(e) {
       const genreData = JSON.parse(e.target.responseText);
-      this.setState({genres : genreData.genres});
-
-      // Create lang checkbox
-      const genres = genreData.genres.map((genreObj) => {
-        console.info(genreObj);
-        return (
-          <label key={ genreObj.id}>< input type="checkbox" key={ genreObj.id}/> { genreObj.name }</label>
-        )
-      });
-
-      this.setState({
-        genres
-      })
+      this.setState({genres: genreData.genres});
     }
 
     const oReq = new XMLHttpRequest();
@@ -85,44 +66,33 @@ export  default  class Filter extends React.Component {
   render() {
 
     return (
-      <div className="filter" >
+      <div className="filter">
         <h1 className="filter-header">Let’s flicks you some movies</h1>
 
-        <div className="genre">
-          <span className="genre-title">Genre</span>
-          <span className="ganres-selected">All</span>
-          <div className="lang-toggler-btn"> > </div>
-          <div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
-            // console.info(genreObj);
-            return (
-              <label  key = { genreObj.id}>
-                { genreObj.name}
-                <input type = "checkbox" key ={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
-                       onChange={(e)=> this.toggleGenreChecked(e, genreObj.id )}
-                />
-              </label>
-            )
-          })}</div>
-        </div>
         <div className="filter-area">
           <div className="genre">
             <span className="genre-title">Genre</span>
             <div className="genre-toggle-btn"> ></div>
-            <div className="genres-checkbox-list">{this.state.genres}</div>
+            <div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
+              return (
+                <label key={genreObj.id}>
+                  <input type="checkbox" key={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
+                         onChange={(e) => this.toggleGenreChecked(e, genreObj.id)}
+                  /> { genreObj.name}
+
+                </label>
+              )
+            })}</div>
           </div>
 
-          <div className="lang">
-            <span className="lang-title">Language</span>
-            <div className="lang-toggle-btn"> ></div>
-            <div className="lang-checkbox-list"><label>< input type="checkbox" key=""/> english </label>
-            </div>
-          </div>
 
           <div className="min-rate right-color">
+            <span className="slider-header"> Minimum Rating </span>
             <MinMax/>
           </div>
 
           <div className="years-range right-color">
+            <span className="slider-header"> Minimum Year Range </span>
             <YearsRange />
           </div>
 
