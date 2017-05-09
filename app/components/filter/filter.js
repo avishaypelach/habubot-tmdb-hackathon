@@ -11,20 +11,37 @@ export  default  class Filter extends React.Component {
     super();
   }
 
+  getGenre() {
+    function reqListener () {
+      const genreData = JSON.parse(this.responseText);
+      console.info(genreData);
+    }
+
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("GET", "https://api.themoviedb.org/3/genre/movie/list?api_key=022c8dc6705c5ca51f38b984d6a5be4a&language=en-US");
+    oReq.send();
+  }
+  componentDidMount () {
+    this.getGenre()
+  }
+
   render() {
-    return (<div className="filter">
+
+    return (
+      <div className="filter">
         <h1>Filter....</h1>
 
         <div className="genre">
           <span className="genre-title">Genre</span>
           <span className="ganres-selected">All</span>
-          <div> > </div>
+          <div> ></div>
         </div>
 
         <div className="lang">
           <span className="lang-title">Language</span>
           <span className="lang-selected">All</span>
-          <div> > </div>
+          <div> ></div>
         </div>
 
         <div className="min-rate">
@@ -38,7 +55,7 @@ export  default  class Filter extends React.Component {
         <div className="string-filter">
           <input type="text" placeholder="Find movie by name/actor/director"/>
         </div>
-        <div className="search-btn">Find me some movies!</div>
+        <div className="search-btn"><span>Find me movies!</span></div>
       </div>
     )
   }
@@ -50,7 +67,7 @@ class MinMax extends React.Component {
     super(props);
 
     this.state = {
-      value: { min: 1950, max: 1970 },
+      value: {min: 1950, max: 1970},
     };
   }
 
@@ -60,7 +77,7 @@ class MinMax extends React.Component {
         maxValue={2017}
         minValue={1900}
         value={this.state.value}
-        onChange={value => this.setState({ value })} />
+        onChange={value => this.setState({value})}/>
     );
   }
 }
@@ -69,7 +86,7 @@ class YearsRange extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { value: 5 };
+    this.state = {value: 5};
   }
 
   render() {
@@ -78,7 +95,7 @@ class YearsRange extends React.Component {
         maxValue={10}
         minValue={0}
         value={this.state.value}
-        onChange={value => this.setState({ value })} />
+        onChange={value => this.setState({value})}/>
     );
   }
 }

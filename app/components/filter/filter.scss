@@ -10,7 +10,20 @@
   padding-top: 7vw;
 }
 
-.string-filter input, search-btn {
-  width: 35%;
-  height: 25px;
+.string-filter input, .search-btn {
+  //width: 25%;
+  height: 5vw;
+  display: flex;
+  justify-content: center;
 }
+
+.filter .search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+  background-color: deepskyblue;
+  width: 25%;
+  height: 5vw;
+}
+
