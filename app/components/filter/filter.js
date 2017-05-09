@@ -17,6 +17,9 @@ export  default  class Filter extends React.Component {
     this.state = {
       genres: [],
       selectedGenres: [],
+      value: {min: 1950, max: 1970},
+      rateValue: 70
+      selectedGenres: [],
       genreIsShowen: false
     }
   }
@@ -103,16 +106,24 @@ export  default  class Filter extends React.Component {
 
           <div className="min-rate">
             <span className="slider-header"> Minimum Rating </span>
-            <MinMax/>
+            <InputRange
+              maxValue={2017}
+              minValue={1900}
+              value={this.state.value}
+              onChange={value => this.setState({value: value})}/>
           </div>
 
           <div className="years-range">
             <span className="slider-header"> Minimum Year Range </span>
-            <YearsRange />
+            <InputRange
+              maxValue={100}
+              minValue={0}
+              value={this.state.rateValue}
+              onChange={value => this.setState({rateValue:value})}/>
           </div>
 
           <div className="string-filter">
-            <input type="text" placeholder="Or search by actor, actress, director, producer"/>
+            <input ref={(input) => { this.textInput = input; }} type="text" placeholder="Or search by actor, actress, director, producer"/>
           </div>
           <div className="search-btn">
             <span> START NOW </span>
@@ -124,42 +135,6 @@ export  default  class Filter extends React.Component {
 
 }
 
-class MinMax extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      value: {min: 1950, max: 1970},
-    };
-  }
-
-  render() {
-    return (
-      <InputRange
-        maxValue={2017}
-        minValue={1900}
-        value={this.state.value}
-        onChange={value => this.setState({value})}/>
-    );
-  }
-}
-
-class YearsRange extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {value: 5};
-  }
-
-  render() {
-    return (
-      <InputRange
-        maxValue={10}
-        minValue={0}
-        value={this.state.value}
-        onChange={value => this.setState({value})}/>
-    );
-  }
-}
 
 
