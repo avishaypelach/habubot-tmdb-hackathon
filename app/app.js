@@ -10,14 +10,15 @@ import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import Root from './components/root/root';
+import Filter from './components/filter/filter';
+// import Root from './components/root/root';
 import store from './store';
 
 render(
   <Provider store={ store }>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={ Root } />
+        <Route exact path="/" component={ Filter } />
       </Switch>
     </BrowserRouter>
   </Provider>,
