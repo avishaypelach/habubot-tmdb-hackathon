@@ -82,7 +82,7 @@ export  default  class Filter extends React.Component {
 
 
           <div className="min-rate spacing">
-            <span className="slider-header"> Minimum Rating </span>
+            <span className="slider-header"> Years Range </span>
             <InputRange
               maxValue={2017}
               minValue={1900}
@@ -91,7 +91,7 @@ export  default  class Filter extends React.Component {
           </div>
 
           <div className="years-range spacing">
-            <span className="slider-header"> Minimum Year Range </span>
+            <span className="slider-header"> Minimum Rating  </span>
             <InputRange
               maxValue={100}
               minValue={0}
