@@ -9,17 +9,55 @@ export  default  class Filter extends React.Component {
 
   constructor() {
     super();
+    this.isGanreChecked = this.isGanreChecked.bind(this);
+    this.toggleGenreChecked = this.toggleGenreChecked.bind(this);
+
 
     this.state = {
-      genres: []
+      genres: [],
+      selectedGenres: []
     }
   }
+
+  isGanreChecked(checkboxid) {
+    for (const id of this.state.selectedGenres) {
+      console.info(id, this.state.selectedGenres);
+      if (checkboxid === id) {
+        return true
+      }
+    }
+    return false
+  }
+
+  toggleGenreChecked(e, objId) {
+    console.info(e.target,  objId);
+    const shouldBeSelected = e.target.checked;
+
+    if (!shouldBeSelected) {
+      //remove from state
+
+      const indexToRemove = this.state.selectedGenres.indexOf(objId);
+      console.info(indexToRemove);
+      const newSelectedGenres = [...this.state.selectedGenres];
+      newSelectedGenres.splice(indexToRemove, 1);
+      console.info('remoooooooove', newSelectedGenres);
+      this.setState( {selectedGenres : newSelectedGenres})
+    } else {
+      //add
+      console.info('adddddddddd');
+      let newSelectedGenres = [...this.state.selectedGenres];
+      newSelectedGenres.push(objId);
+      console.info(newSelectedGenres);
+      this.setState( {selectedGenres : newSelectedGenres})
+    }
+  }
+
 
 
   createGenresList() {
     function reqListener(e) {
       const genreData = JSON.parse(e.target.responseText);
-      console.info(genreData.genres);
+      this.setState({genres : genreData.genres});
 
       // Create lang checkbox
       const genres = genreData.genres.map((genreObj) => {
@@ -50,6 +88,22 @@ export  default  class Filter extends React.Component {
       <div className="filter" >
         <h1 className="filter-header">Let’s flicks you some movies</h1>
 
+        <div className="genre">
+          <span className="genre-title">Genre</span>
+          <span className="ganres-selected">All</span>
+          <div className="lang-toggler-btn"> > </div>
+          <div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
+            // console.info(genreObj);
+            return (
+              <label  key = { genreObj.id}>
+                { genreObj.name}
+                <input type = "checkbox" key ={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
+                       onChange={(e)=> this.toggleGenreChecked(e, genreObj.id )}
+                />
+              </label>
+            )
+          })}</div>
+        </div>
         <div className="filter-area">
           <div className="genre">
             <span className="genre-title">Genre</span>
