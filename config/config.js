@@ -1,4 +1,4 @@
 module.exports = {
   TMDB_API_URL: 'https://api.themoviedb.org/3',
-  TMDB_API_TOKEN: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMjcyYTcyNzExMmIwOGI3MDk5YTM5ODc4N2JhNWExMCIsInN1YiI6IjU5MTBjYjhjYzNhMzY4NjRmYzAzNjY5OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MH8_E-0WyRu7nBvcU28O5Nfw4LrYEHbNOW8v1aQugr8'
+  TMDB_API_TOKEN: '022c8dc6705c5ca51f38b984d6a5be4a'
 };
