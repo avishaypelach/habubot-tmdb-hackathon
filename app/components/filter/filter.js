@@ -14,6 +14,10 @@ export  default  class Filter extends React.Component {
 
     this.state = {
       genres: [],
+      selectedGenres: [],
+      value: {min: 1950, max: 1970},
+      rateValue: 70,
+      selectedGenres: [],
       genreIsShowen: false
     }
   }
@@ -69,6 +73,7 @@ export  default  class Filter extends React.Component {
 
     return (
       <div className="filter">
+        <img src="../../assets/img/Logo.png" alt=""/>
         <h1 className="filter-header">Let’s flicks you some movies</h1>
 
         <div className="filter-area">
