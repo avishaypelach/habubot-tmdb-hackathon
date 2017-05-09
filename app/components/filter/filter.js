@@ -1,7 +1,6 @@
 import './filter.scss';
 
 import React from 'react';
-import {connect} from 'react-redux';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 
@@ -10,16 +9,11 @@ export  default  class Filter extends React.Component {
   constructor() {
     super();
     this.isGanreChecked = this.isGanreChecked.bind(this);
-    this.toggleGenreChecked = this.toggleGenreChecked.bind(this);
     this.genreDisplay = this.genreDisplay.bind(this);
     this.toggleGenre = this.toggleGenre.bind(this);
 
     this.state = {
       genres: [],
-      selectedGenres: [],
-      value: {min: 1950, max: 1970},
-      rateValue: 70,
-      selectedGenres: [],
       genreIsShowen: false
     }
   }
@@ -36,7 +30,7 @@ export  default  class Filter extends React.Component {
         return (
           <label key={genreObj.id}>
             <input type="checkbox" key={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
-                   onChange={(e) => this.toggleGenreChecked(e, genreObj.id)}
+                   onChange={(e) => this.props.selectGenre(genreObj.id, e.target.checked)}
             /> { genreObj.name}
 
           </label>
@@ -46,32 +40,13 @@ export  default  class Filter extends React.Component {
   }
 
   isGanreChecked(checkboxid) {
-    for (const id of this.state.selectedGenres) {
+    for (const id of this.props.selectedGenres) {
       if (checkboxid === id) {
         return true
       }
     }
     return false
   }
-
-  toggleGenreChecked(e, objId) {
-    const shouldBeSelected = e.target.checked;
-
-    if (!shouldBeSelected) {
-      //remove from state
-
-      const indexToRemove = this.state.selectedGenres.indexOf(objId);
-      const newSelectedGenres = [...this.state.selectedGenres];
-      newSelectedGenres.splice(indexToRemove, 1);
-      this.setState({selectedGenres: newSelectedGenres})
-    } else {
-      //add
-      let newSelectedGenres = [...this.state.selectedGenres];
-      newSelectedGenres.push(objId);
-      this.setState({selectedGenres: newSelectedGenres})
-    }
-  }
-
 
   createGenresList() {
     function reqListener(e) {
@@ -87,7 +62,7 @@ export  default  class Filter extends React.Component {
 
   componentDidMount() {
     this.createGenresList()
-    }
+  }
 
   render() {
     console.info(this.state.genreIsShowen);
@@ -109,8 +84,8 @@ export  default  class Filter extends React.Component {
             <InputRange
               maxValue={2017}
               minValue={1900}
-              value={this.state.value}
-              onChange={value => this.setState({value: value})}/>
+              value={this.props.value}
+              onChange={value => this.props.changeValue(value)}/>
           </div>
 
           <div className="years-range">
@@ -118,8 +93,8 @@ export  default  class Filter extends React.Component {
             <InputRange
               maxValue={100}
               minValue={0}
-              value={this.state.rateValue}
-              onChange={value => this.setState({rateValue:value})}/>
+              value={this.props.rateValue}
+              onChange={value => this.props.changeRateValue(value)}/>
           </div>
 
           <div className="string-filter">
