@@ -111,13 +111,6 @@ export  default  class Filter extends React.Component {
             <div className="genres-checkbox-list">{this.state.genres}</div>
           </div>
 
-          <div className="lang">
-            <span className="lang-title">Language</span>
-            <div className="lang-toggle-btn"> ></div>
-            <div className="lang-checkbox-list"><label>< input type="checkbox" key=""/> english </label>
-            </div>
-          </div>
-
           <div className="min-rate right-color">
             <MinMax/>
           </div>
