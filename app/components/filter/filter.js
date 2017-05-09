@@ -18,7 +18,7 @@ export  default  class Filter extends React.Component {
       genres: [],
       selectedGenres: [],
       value: {min: 1950, max: 1970},
-      rateValue: 70
+      rateValue: 70,
       selectedGenres: [],
       genreIsShowen: false
     }
@@ -87,7 +87,7 @@ export  default  class Filter extends React.Component {
 
   componentDidMount() {
     this.createGenresList()
-  }
+    }
 
   render() {
     console.info(this.state.genreIsShowen);
