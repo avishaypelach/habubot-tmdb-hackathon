@@ -11,11 +11,34 @@ export  default  class Filter extends React.Component {
     super();
     this.isGanreChecked = this.isGanreChecked.bind(this);
     this.toggleGenreChecked = this.toggleGenreChecked.bind(this);
-
+    this.genreDisplay = this.genreDisplay.bind(this);
+    this.toggleGenre = this.toggleGenre.bind(this);
 
     this.state = {
       genres: [],
-      selectedGenres: []
+      selectedGenres: [],
+      genreIsShowen: false
+    }
+  }
+
+  toggleGenre() {
+    console.info('heyyyyyy');
+
+    this.setState({genreIsShowen: !this.state.genreIsShowen})
+  }
+
+  genreDisplay(){
+    if(this.state.genreIsShowen){
+      return(<div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
+        return (
+          <label key={genreObj.id}>
+            <input type="checkbox" key={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
+                   onChange={(e) => this.toggleGenreChecked(e, genreObj.id)}
+            /> { genreObj.name}
+
+          </label>
+        )
+      })}</div>)
     }
   }
 
@@ -64,6 +87,7 @@ export  default  class Filter extends React.Component {
   }
 
   render() {
+    console.info(this.state.genreIsShowen);
 
     return (
       <div className="filter">
@@ -72,26 +96,17 @@ export  default  class Filter extends React.Component {
         <div className="filter-area">
           <div className="genre">
             <span className="genre-title">Genre</span>
-            <div className="genre-toggle-btn"> ></div>
-            <div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
-              return (
-                <label key={genreObj.id}>
-                  <input type="checkbox" key={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
-                         onChange={(e) => this.toggleGenreChecked(e, genreObj.id)}
-                  /> { genreObj.name}
-
-                </label>
-              )
-            })}</div>
+            <div className="genre-toggle-btn" onClick={this.toggleGenre}> >>> </div>
+            {this.genreDisplay()}
           </div>
 
 
-          <div className="min-rate right-color">
+          <div className="min-rate">
             <span className="slider-header"> Minimum Rating </span>
             <MinMax/>
           </div>
 
-          <div className="years-range right-color">
+          <div className="years-range">
             <span className="slider-header"> Minimum Year Range </span>
             <YearsRange />
           </div>
@@ -99,7 +114,9 @@ export  default  class Filter extends React.Component {
           <div className="string-filter">
             <input type="text" placeholder="Or search by actor, actress, director, producer"/>
           </div>
-          <div className="search-btn"><span> START NOW </span></div>
+          <div className="search-btn">
+            <span> START NOW </span>
+          </div>
         </div>
       </div>
     )
