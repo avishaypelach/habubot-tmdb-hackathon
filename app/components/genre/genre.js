@@ -1,7 +1,16 @@
-import './root.scss';
+/**
+ * Created by avishay on 09-May-17.
+ */
+import './genre.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 import Movies from '../movies/movies';
 import TMDB from '../../core/tmdb';
@@ -24,14 +33,16 @@ class Root extends React.Component {
       loading: true
     });
 
-    TMDB.get('/discover/movie?sort_by=popularity.desc').then((data) => {
-      // log `data` here to inspect the fetched data
+    TMDB.get('/discover/movie?sort_by=popularity.desc')
+      .then((data) => {
+        // log `data` here to inspect the fetched data
 
-      this.setState({
-      loading: false
-    });
-    this.props.setMovies(data.results);
-  });
+        this.setState({
+          loading: false
+        });
+
+        this.props.setMovies(data.results);
+      });
   }
 
   handleClick(e) {
@@ -41,19 +52,19 @@ class Root extends React.Component {
   render() {
     return (
       <div className="root">
-      <h1 className="root-heading"
-    onClick={ this.handleClick }>
-    TMDB Hackathon!
-    </h1>
+        <h1 className="root-heading"
+            onClick={ this.handleClick }>
+          TMDB Hackathon!
+        </h1>
 
-    <p>Click the heading to see some action!</p>
-    <p>Fetched movies: { this.props.movies.length }</p>
+        <p>Click the heading to see some action!</p>
+        <p>Fetched movies: { this.props.movies.length }</p>
 
-    { this.state.loading && 'Loading...' }
+        { this.state.loading && 'Loading...' }
 
-  <Movies />
-    </div>
-  );
+        <Movies />
+      </div>
+    );
   }
 }
 

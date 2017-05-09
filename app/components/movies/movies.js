@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 class Movies extends React.Component {
 
@@ -29,7 +29,7 @@ class Movies extends React.Component {
   }
 }
 
-function mapStateToProps({ movies }) {
+function mapStateToProps({movies}) {
   return {
     movies: movies
   };
