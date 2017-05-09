@@ -15,13 +15,14 @@ export  default  class Filter extends React.Component {
 
     this.state = {
       genres: [],
-      selectedGenres: []
+      selectedGenres: [],
+      value: {min: 1950, max: 1970},
+      rateValue: 70
     }
   }
 
   isGanreChecked(checkboxid) {
     for (const id of this.state.selectedGenres) {
-      console.info(id, this.state.selectedGenres);
       if (checkboxid === id) {
         return true
       }
@@ -30,46 +31,28 @@ export  default  class Filter extends React.Component {
   }
 
   toggleGenreChecked(e, objId) {
-    console.info(e.target,  objId);
     const shouldBeSelected = e.target.checked;
 
     if (!shouldBeSelected) {
       //remove from state
 
       const indexToRemove = this.state.selectedGenres.indexOf(objId);
-      console.info(indexToRemove);
       const newSelectedGenres = [...this.state.selectedGenres];
       newSelectedGenres.splice(indexToRemove, 1);
-      console.info('remoooooooove', newSelectedGenres);
-      this.setState( {selectedGenres : newSelectedGenres})
+      this.setState({selectedGenres: newSelectedGenres})
     } else {
       //add
-      console.info('adddddddddd');
       let newSelectedGenres = [...this.state.selectedGenres];
       newSelectedGenres.push(objId);
-      console.info(newSelectedGenres);
-      this.setState( {selectedGenres : newSelectedGenres})
+      this.setState({selectedGenres: newSelectedGenres})
     }
   }
-
 
 
   createGenresList() {
     function reqListener(e) {
       const genreData = JSON.parse(e.target.responseText);
-      this.setState({genres : genreData.genres});
-
-      // Create lang checkbox
-      const genres = genreData.genres.map((genreObj) => {
-        console.info(genreObj);
-        return (
-          <label key={ genreObj.id}>< input type="checkbox" key={ genreObj.id}/> { genreObj.name }</label>
-        )
-      });
-
-      this.setState({
-        genres
-      })
+      this.setState({genres: genreData.genres});
     }
 
     const oReq = new XMLHttpRequest();
@@ -83,44 +66,49 @@ export  default  class Filter extends React.Component {
   }
 
   render() {
-
+    console.info(this.state.value);
+    console.info(this.state.rateValue);
     return (
-      <div className="filter" >
+      <div className="filter">
         <h1 className="filter-header">Let’s flicks you some movies</h1>
 
-        <div className="genre">
-          <span className="genre-title">Genre</span>
-          <span className="ganres-selected">All</span>
-          <div className="lang-toggler-btn"> > </div>
-          <div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
-            // console.info(genreObj);
-            return (
-              <label  key = { genreObj.id}>
-                { genreObj.name}
-                <input type = "checkbox" key ={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
-                       onChange={(e)=> this.toggleGenreChecked(e, genreObj.id )}
-                />
-              </label>
-            )
-          })}</div>
-        </div>
         <div className="filter-area">
           <div className="genre">
             <span className="genre-title">Genre</span>
             <div className="genre-toggle-btn"> ></div>
-            <div className="genres-checkbox-list">{this.state.genres}</div>
+            <div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
+              return (
+                <label key={genreObj.id}>
+                  <input type="checkbox" key={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
+                         onChange={(e) => this.toggleGenreChecked(e, genreObj.id)}
+                  /> { genreObj.name}
+
+                </label>
+              )
+            })}</div>
           </div>
 
+
           <div className="min-rate right-color">
-            <MinMax/>
+            <span className="slider-header"> Minimum Rating </span>
+            <InputRange
+              maxValue={2017}
+              minValue={1900}
+              value={this.state.value}
+              onChange={value => this.setState({value: value})}/>
           </div>
 
           <div className="years-range right-color">
-            <YearsRange />
+            <span className="slider-header"> Minimum Year Range </span>
+            <InputRange
+              maxValue={100}
+              minValue={0}
+              value={this.state.rateValue}
+              onChange={value => this.setState({rateValue:value})}/>
           </div>
 
           <div className="string-filter">
-            <input type="text" placeholder="Or search by actor, actress, director, producer"/>
+            <input ref={(input) => { this.textInput = input; }} type="text" placeholder="Or search by actor, actress, director, producer"/>
           </div>
           <div className="search-btn"><span> START NOW </span></div>
         </div>
@@ -130,42 +118,6 @@ export  default  class Filter extends React.Component {
 
 }
 
-class MinMax extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      value: {min: 1950, max: 1970},
-    };
-  }
-
-  render() {
-    return (
-      <InputRange
-        maxValue={2017}
-        minValue={1900}
-        value={this.state.value}
-        onChange={value => this.setState({value})}/>
-    );
-  }
-}
-
-class YearsRange extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {value: 5};
-  }
-
-  render() {
-    return (
-      <InputRange
-        maxValue={10}
-        minValue={0}
-        value={this.state.value}
-        onChange={value => this.setState({value})}/>
-    );
-  }
-}
 
 
