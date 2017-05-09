@@ -1,13 +1,46 @@
+html,
+body{
+  height: 100%;
+  width: 100%;
+  background: url("../../../Flickster_web/Flickster_web/assets/Screen Shot 2017-05-09 at 1.30.56 PM.png");
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.70);
+}
+
 .filter {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  padding-left: 22px;
+  height: 100vh;
+  color: #FFFFFF;
 }
-.filter > div  {
+
+.filter > div {
   display: flex;
   width: 50%;
   justify-content: space-between;
   padding-top: 7vw;
+}
+
+.filter-header {
+  font-size: 48px;
+  width: 60.8%;
+  height: 8.6%;
+}
+
+.filter-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 33.7%;
+  height: 50%;
+}
+
+.string-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .string-filter input, .search-btn {
@@ -18,14 +51,63 @@
 }
 
 .filter .search-btn {
+  align-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 0;
-  background-color: deepskyblue;
-
-  
+  background-color: #FBAF3F;
   width: 25%;
   height: 5vw;
 }
 
+.genre {
+  position: relative;
+  display: inline-block;
+}
+.genre-title{
+
+}
+.genre-toggle-btn{
+  display: inline-block;
+}
+
+.genres-checkbox-list {
+  position: absolute;
+  top: 80%;
+  left: 105%;
+  min-width: 200px;
+  height: 400px;
+  //display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px;
+  z-index: 10;
+  display: none;
+  text-transform: capitalize;
+}
+
+.lang {
+  position: relative;
+}
+
+.lang-checkbox-list {
+  position: absolute;
+  top: 80%;
+  left: 105%;
+  min-width: 200px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px;
+  z-index: 10;
+  //display: none;
+  text-transform: capitalize;
+}
+.right-color{
+  color: #FBAF3F;
+
+}
