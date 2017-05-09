@@ -8,7 +8,8 @@ export default class Root extends React.Component {
     this.state = {
       value: {min: 1950, max: 1970},
       rateValue: 70,
-      selectedGenres: []
+      selectedGenres: [],
+      query: ''
     }
   }
 
@@ -35,9 +36,11 @@ export default class Root extends React.Component {
               value={this.state.value}
               rateValue={this.state.rateValue}
               selectedGenres={this.state.selectedGenres}
+              query={this.state.query}
               changeValue={(v) => this.setState({value: v})}
               changeRateValue={(v) => this.setState({rateValue: v})}
               selectGenre={(genre, shouldBeSelected) => this.toggleGenreSelected(genre, shouldBeSelected)}
+              changeQuery={q => this.setState({query: q})}
               {...props} /> }/>
         </Switch>
       </BrowserRouter>

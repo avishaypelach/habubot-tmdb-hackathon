@@ -98,7 +98,7 @@ export  default  class Filter extends React.Component {
           </div>
 
           <div className="string-filter">
-            <input ref={(input) => { this.textInput = input; }} type="text" placeholder="Or search by actor, actress, director, producer"/>
+            <input value={this.props.query} onChange={e => this.props.changeQuery(e.target.value)} type="text" placeholder="Or search by actor, actress, director, producer"/>
           </div>
           <div className="search-btn">
             <span> START NOW </span>
