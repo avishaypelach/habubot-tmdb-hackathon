@@ -18,21 +18,18 @@ export  default  class Filter extends React.Component {
       genres: [],
       selectedGenres: [],
       value: {min: 1950, max: 1970},
-      rateValue: 70
-      selectedGenres: [],
+      rateValue: 70,
       genreIsShowen: false
     }
   }
 
   toggleGenre() {
-    console.info('heyyyyyy');
-
     this.setState({genreIsShowen: !this.state.genreIsShowen})
   }
 
-  genreDisplay(){
-    if(this.state.genreIsShowen){
-      return(<div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
+  genreDisplay() {
+    if (this.state.genreIsShowen) {
+      return (<div className="genres-checkbox-list">{this.state.genres.map((genreObj) => {
         return (
           <label key={genreObj.id}>
             <input type="checkbox" key={ genreObj.id} checked={this.isGanreChecked(genreObj.id)}
@@ -97,14 +94,14 @@ export  default  class Filter extends React.Component {
         <h1 className="filter-header">Let’s flicks you some movies</h1>
 
         <div className="filter-area">
-          <div className="genre">
+          <div className="genre spacing">
             <span className="genre-title">Genre</span>
-            <div className="genre-toggle-btn" onClick={this.toggleGenre}> >>> </div>
+            <div className="genre-toggle-btn" onClick={this.toggleGenre}> >>></div>
             {this.genreDisplay()}
           </div>
 
 
-          <div className="min-rate">
+          <div className="min-rate spacing">
             <span className="slider-header"> Minimum Rating </span>
             <InputRange
               maxValue={2017}
@@ -113,17 +110,19 @@ export  default  class Filter extends React.Component {
               onChange={value => this.setState({value: value})}/>
           </div>
 
-          <div className="years-range">
+          <div className="years-range spacing">
             <span className="slider-header"> Minimum Year Range </span>
             <InputRange
               maxValue={100}
               minValue={0}
               value={this.state.rateValue}
-              onChange={value => this.setState({rateValue:value})}/>
+              onChange={value => this.setState({rateValue: value})}/>
           </div>
 
-          <div className="string-filter">
-            <input ref={(input) => { this.textInput = input; }} type="text" placeholder="Or search by actor, actress, director, producer"/>
+          <div className="string-filter-area spacing">
+            <input className="string-filter" ref={(input) => {
+              this.textInput = input;
+            }} type="text" placeholder="Or search by actor, actress, director, producer"/>
           </div>
           <div className="search-btn">
             <span> START NOW </span>

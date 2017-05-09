@@ -31,7 +31,6 @@
   display: flex;
   width: 50%;
   justify-content: space-between;
-  padding-top: 7vw;
 }
 
 .filter-header {
@@ -53,33 +52,53 @@
   display: inline-block;
 }
 .genre-title{
-
+  font-size: 1.5rem;
 }
 .genre-toggle-btn{
   display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+}
+.slider-header{
+  font-size: 1.5rem;
 }
 
 .genres-checkbox-list {
   position: absolute;
   top: 80%;
   left: 105%;
-  min-width: 200px;
-  height: 400px;
+  width: 70%;
+  height: 349px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
   padding: 20px;
   z-index: 10;
-  //display: none;
   text-transform: capitalize;
-  opacity: 0.2;
-  background: #FFFFFF;
+  font-size: 1.5rem;
 }
 label{
-  color: black;
+  font-size: 1.5rem;
+  text-transform: capitalize;
 }
 .right-color{
   color: #FBAF3F;
+}
+.spacing{
+  margin-bottom: 30px;
+}
+.string-filter-area{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 30%;
+  border-radius: 30px;
+  font-size: 1.5rem;
 }
 
 .string-filter {
@@ -87,8 +106,10 @@ label{
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  height: 20%;
+  height: 75%;
   border-radius: 30px;
+  font-size: 1.125rem;
+  padding-left: 30px;
 }
 
 .search-btn {
@@ -102,4 +123,5 @@ label{
   height: 20%;
   font-size: 1.125rem;
   text-transform: uppercase;
+  border-radius: 30px;
 }
