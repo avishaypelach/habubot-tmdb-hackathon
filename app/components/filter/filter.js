@@ -9,21 +9,38 @@ export  default  class Filter extends React.Component {
 
   constructor() {
     super();
+
+    this.state = {
+      genres: []
+    }
   }
 
-  getGenre() {
-    function reqListener () {
-      const genreData = JSON.parse(this.responseText);
-      console.info(genreData);
+
+  createGenresList() {
+    function reqListener (e) {
+      const genreData = JSON.parse(e.target.responseText);
+      console.info(genreData.genres);
+
+      // Create lang checkbox
+      const genres = genreData.genres.map((genreObj) => {
+        console.info(genreObj);
+        return (
+          <label  key = { genreObj.id}> { genreObj.name }< input type = "checkbox" key = { genreObj.id} /></label>
+        )
+      });
+
+      this.setState({
+        genres
+      })
     }
 
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", reqListener);
+    const oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener.bind(this));
     oReq.open("GET", "https://api.themoviedb.org/3/genre/movie/list?api_key=022c8dc6705c5ca51f38b984d6a5be4a&language=en-US");
     oReq.send();
   }
   componentDidMount () {
-    this.getGenre()
+    this.createGenresList()
   }
 
   render() {
@@ -35,7 +52,8 @@ export  default  class Filter extends React.Component {
         <div className="genre">
           <span className="genre-title">Genre</span>
           <span className="ganres-selected">All</span>
-          <div> ></div>
+          <div className="lang-toggler-btn"> > </div>
+          <div className="genres-checkbox-list">{this.state.genres}</div>
         </div>
 
         <div className="lang">
